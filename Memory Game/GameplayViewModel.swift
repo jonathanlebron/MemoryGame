@@ -45,7 +45,6 @@ class GameplayViewModel {
     var cardsToMatch: Int
     weak var delegate: GameplayViewModelDelegate?
     
-    
     init(_ rows: Int, _ columns: Int) {
         self.cards = []
         self.cardsToMatch = (rows * columns) / 2
@@ -54,7 +53,7 @@ class GameplayViewModel {
         self.rows = rows
         self.startTime = DispatchTime.now()
         
-        
+        // Create cards, each loop creates a pair of matching cards
         for i in 0..<cardsToMatch {
             let cardName = cardNames[i % cardNames.count]
             let card = Card(name: cardName)
@@ -70,7 +69,7 @@ class GameplayViewModel {
         cards[atIndex].flip()
         
         if flippedCardIndex != -1 {
-            if cards[atIndex].name != cards[flippedCardIndex].name {
+            if cards[atIndex].name != cards[flippedCardIndex].name { // check if cards don't match
                 cards[atIndex].flip()
                 cards[flippedCardIndex].flip()
                 
@@ -79,7 +78,7 @@ class GameplayViewModel {
                 }
             } else {
                 cardsToMatch -= 1
-                if cardsToMatch == 0 {
+                if cardsToMatch == 0 { // check for win condition
                     let timeElapsed = DispatchTime.now().uptimeNanoseconds -  self.startTime.uptimeNanoseconds
                     let timeElapsedInSeconds = Double(timeElapsed) / 1_000_000_000
                     if let delegate = delegate {

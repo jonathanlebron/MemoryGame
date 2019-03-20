@@ -12,7 +12,6 @@ class CardCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cardImageViewFront: UIImageView!
     @IBOutlet weak var cardImageViewBack: UIImageView!
     
-    
     func flipCardImageView(reverse: Bool) {
         isUserInteractionEnabled = reverse
         if reverse {

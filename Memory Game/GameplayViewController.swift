@@ -14,9 +14,11 @@ class GameplayViewController: UIViewController, UICollectionViewDataSource, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         cardsCollectionView.delegate = self
         cardsCollectionView.dataSource = self
         cardsCollectionView.contentInsetAdjustmentBehavior = .always
+        
         if let gameplayViewModel = gameplayViewModel {
             gameplayViewModel.delegate = self
         }
@@ -74,7 +76,6 @@ class GameplayViewController: UIViewController, UICollectionViewDataSource, UICo
         
         let card = gameplayViewModel.cards[indexPath.row]
         cell.cardImageViewFront.image = UIImage(named: card.name)
-        
         return cell
     }
     
@@ -83,7 +84,6 @@ class GameplayViewController: UIViewController, UICollectionViewDataSource, UICo
 
         if let gameplayViewModel = gameplayViewModel {
             let card = gameplayViewModel.cards[indexPath.row]
-            
             if !card.isFlipped {
                 cell.flipCardImageView(reverse: card.isFlipped)
                 gameplayViewModel.flipCard(atIndex: indexPath.row)
